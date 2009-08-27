@@ -4,7 +4,7 @@
  *
  * @copyright (c) 2001, PostNuke Development Team
  * @link http://www.postnuke.com
- * @version $Id: pninit.php 22371 2007-07-10 12:47:15Z rgasch $
+ * @version $Id$
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
