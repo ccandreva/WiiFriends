@@ -1,0 +1,14 @@
+<ul id="WiifriendsMenu">
+
+<li><a href="<!--[pnmodurl modname="wiifriends" ]-->">My Games</a></li>
+<li><a href="<!--[pnmodurl modname="wiifriends" func="addwfc" ]-->">Add a Friend Code</a></li>
+<li><a href="<!--[pnmodurl modname="wiifriends" func="showgames" ]-->">See All Games</a></li>
+<li><a href="<!--[pnmodurl modname="wiifriends" func="showconsole" ]-->">See All Console Codes</a></li>
+<li><a href="<!--[pnmodurl modname="wiifriends" func="addgame" ]-->">Suggest a Game</a></li>
+<!--[nocache]-->
+<!--[pnsecauthaction comp="WiiFriends::" inst="::" level="ACCESS_ADMIN" assign="auth"]-->
+<!--[if $auth ]-->
+<li><a href="<!--[pnmodurl modname="wiifriends" type="admin"]-->">Admin</a></li>
+<!--[/if]-->
+<!--[/nocache]-->
+</ul>

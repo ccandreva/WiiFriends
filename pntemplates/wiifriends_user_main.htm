@@ -1,0 +1,46 @@
+<!--[* $Id: blank_user_main.htm 22155 2007-06-04 11:35:23Z markwest $ *]-->
+
+<h1>Wii Friends</h1>
+
+<!--[include file="wiifriends_user_menu.htm"]-->
+
+<!--[insert name='getstatusmsg' module='WiiFriends']-->
+
+
+<h2>Your Information</h2>
+<!--[pnmodurl modname="wiifriends" func="editconsole" assign="consoleurl"]-->
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall 
+	alt='_WIIFRIENDS_USER_EDITICONALT' altml=true assign=editIcon]-->
+
+<!--[nocache]-->
+<!--[if $console == '' ]-->
+<!--[assign var="console" value="(None set)" ]-->
+<!--[/if]-->
+<p>Your console code is: <strong><!--[$console]--></strong>
+<!--[/nocache]-->
+
+<a href="<!--[$consoleurl]-->" title="Edit your console code."><!--[$editIcon.imgtag]--></a>
+</p>
+
+
+<h3>Your Games</h3>
+<table>
+<tr>
+<th>Game</th>
+<th>Friend Code</th>
+</tr>
+
+<!--[nocache]-->
+<!--[foreach item=item from=$codes]-->
+<tr>
+<td><!--[$item.gameName]--></td>
+<td><!--[$item.code|regex_replace:"/^(\d{4})(\d{4})(\d{4})/":"\${1}-\${2}-\${3}"]--></td>
+<td>
+<a href="<!--[pnmodurl modname="wiifriends" func="editwfc" id=$item.id ]-->"
+	title="Edit this game."><!--[$editIcon.imgtag]--></a>
+</td>
+</tr>
+<!--[/foreach]-->
+<!--[/nocache]-->
+
+</table>

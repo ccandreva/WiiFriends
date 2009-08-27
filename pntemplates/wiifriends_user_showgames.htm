@@ -1,0 +1,21 @@
+
+<h1>All Games</h1>
+
+<!--[include file="wiifriends_user_menu.htm"]-->
+<!--[insert name='getstatusmsg' module='WiiFriends']-->
+<!--[* <p>Where: <!--[$where]--></p> *]-->
+
+<table>
+<tr>
+<th>Name</th>
+</tr>
+
+
+<!--[foreach key=game item=item from=$games]-->
+<tr>
+<td><!--[$item.game]--></td>
+<td><a href="<!--[pnmodurl modname="wiifriends" func="showcodes" id=$item.id ]-->">Show Codes</A>
+</tr>
+<!--[/foreach]-->
+
+</table>
