@@ -1,24 +1,28 @@
 
-<h1>Add Friend Code</h1>
+<h1><!--[gt text='Add Friend Code']--></h1>
 
 <!--[include file="wiifriends_user_menu.htm"]-->
-<p>ID: <!--[$id]--></p>
+<!--[* <p>ID: <!--[$id]--></p> *]-->
 
 <!--[insert name='getstatusmsg' module='WiiFriends']-->
 
 <!--[nocache]-->
-<!--[pnform cssClass=""]-->
+<!--[pnform cssClass="z-form"]-->
 <!--[pnformvalidationsummary]-->
 
-<p>
-<!--[pnformlabel for=game text="game"]-->
-<!--[pnformdropdownlist id=game mandatory=1]-->
-</p>
+<fieldset>
+  <legend><!--[gt text='Enter You Information']-->
 
-<p>
-<!--[pnformlabel for=code text="Code"]-->
-<!--[pnformtextinput id=code width=14em maxLength=14 mandatory=1]-->
-</p>
+  <div class="z-admincontainer">
+    <!--[pnformlabel for=game __text="Name of Game"]-->
+    <!--[pnformdropdownlist id=game mandatory=1]-->
+  </div>
+
+  <div class="z-admincontainer">
+    <!--[pnformlabel for=code __text="Your Friend Code"]-->
+    <!--[pnformtextinput id=code width=14em maxLength=14 mandatory=1]-->
+  </div>
+</fieldset>
 
 <!--[pnformbutton commandName="submit" text="Submit" ]-->
 <!--[/pnform]-->

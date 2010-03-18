@@ -1,28 +1,33 @@
 
-<h1>Add Game</h1>
+<h1><!--[gt text="Game Administration"]--></h1>
 
 <!--[include file="wiifriends_user_menu.htm"]-->
 
 
 <!--[insert name='getstatusmsg' module='WiiFriends']-->
 
-<!--[pnform cssClass=""]-->
+<!--[pnform cssClass="z-form"]-->
 <!--[pnformvalidationsummary]-->
 
-<p>
-<!--[pnformlabel for=game text="Game"]-->
-<!--[pnformtextinput id=game width=20em maxLength=200 mandatory=1]-->
-</p>
+<fieldset>
+  <legend><!--[gt text="Edit Game"]--></legend>
 
-<p>
-<!--[pnformlabel for=obj_status text="Status"]-->
-<!--[pnformdropdownlist id=obj_status mandatory=1]-->
-</p>
+  
+  <div class="z-formrow">
+  <!--[pnformlabel for=game __text="Game Name"]-->
+  <!--[pnformtextinput id=game width=20em maxLength=200 mandatory=1]-->
+  </div>
 
-<p>
-<!--[pnformlabel for=delete text="Delete this game:"]-->
-<!--[pnformcheckbox id=delete]-->
-</p>
+  <div class="z-formrow">
+  <!--[pnformlabel for=obj_status __text="Status" ]-->
+  <!--[pnformdropdownlist id=obj_status mandatory=1 width=4em]-->
+  </div>
 
-<!--[pnformbutton commandName="submit" text="Submit" ]-->
+  <div class="z-formrow">
+  <!--[pnformlabel for=delete __text="Delete this game:"]-->
+  <!--[pnformcheckbox id=delete]-->
+  </div>
+</fieldset>
+
+<!--[pnformbutton commandName="submit" __text="Submit" ]-->
 <!--[/pnform]-->

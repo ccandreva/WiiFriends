@@ -18,7 +18,7 @@ function wiifriends_init()
 */
 
     pnModSetVar('wiifriends', 'modulestylesheet', 'wiifriends.css');
-
+    pnModSetVar('wiifriends', 'adminEmail', '');
     // get the db driver
     $dbdriver = DBConnectionStack::getConnectionDBDriver();
     
@@ -33,6 +33,18 @@ function wiifriends_init()
 
 function wiifriends_upgrade($oldversion)
 {
+    switch($oldversion) {
+        case "1.0" :
+            pnModSetVar('wiifriends', 'adminEmail', '');
+
+        /* This break should be after the last upgrade */
+            break;
+            
+        default:
+            pnSessionSetVar('errormsg', __("An unknown version is installed!") );
+            return false;
+    }
+                
     return true;
 }
 

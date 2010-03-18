@@ -10,6 +10,7 @@
 
 Loader::requireOnce('includes/pnForm.php');
 require_once('pnclass/editgamehandler.php');
+require_once('pnclass/editadminhandler.php');
 
 function wiifriends_admin_main()
 {
@@ -17,8 +18,17 @@ function wiifriends_admin_main()
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);
     }
 
-    $pnRender = pnRender::getInstance('WiiFriends', false);
-    return $pnRender->fetch('wiifriends_admin_main.htm');
+    $render = FormUtil::newpnForm('WiiFriends');
+    $tmplfile='wiifriends_admin_main.htm';
+    if ($render->template_exists($tmplfile))
+    {
+        $formobj = new wiifriends_admin_mainHandler();
+        $output = $render->pnFormExecute($tmplfile, $formobj);
+    } else {
+        $output =  "No template found: $tmplfile";
+    }
+    return $output;
+
 
 }
 

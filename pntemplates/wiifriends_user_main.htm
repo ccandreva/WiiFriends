@@ -1,33 +1,32 @@
 <!--[* $Id$ *]-->
 
-<h1>Wii Friends</h1>
+<h1><!--[gt text="Wii Friends"]--></h1>
 
 <!--[include file="wiifriends_user_menu.htm"]-->
 
 <!--[insert name='getstatusmsg' module='WiiFriends']-->
 
 
-<h2>Your Information</h2>
+<h2><!--[gt text="Your Information"]--></h2>
 <!--[pnmodurl modname="wiifriends" func="editconsole" assign="consoleurl"]-->
-<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall 
-	alt='_WIIFRIENDS_USER_EDITICONALT' altml=true assign=editIcon]-->
+<!--[pnimg modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon]-->
 
 <!--[nocache]-->
 <!--[if $console == '' ]-->
-<!--[assign var="console" value="(None set)" ]-->
+<!--[assign var="console" __value="(None set)" ]-->
 <!--[/if]-->
-<p>Your console code is: <strong><!--[$console]--></strong>
+<p><!--[gt text="Your console code is"]-->: <strong><!--[$console]--></strong>
 <!--[/nocache]-->
 
-<a href="<!--[$consoleurl]-->" title="Edit your console code."><!--[$editIcon.imgtag]--></a>
+<a href="<!--[$consoleurl]-->" title="<!--[gt text='Edit your console code']-->."><!--[$editIcon.imgtag]--></a>
 </p>
 
 
-<h3>Your Games</h3>
+<h3><!--[gt text="Your Games"]--></h3>
 <table>
 <tr>
-<th>Game</th>
-<th>Friend Code</th>
+<th><!--[gt text="Game"]--></th>
+<th><!--[gt text="Friend Code"]--></th>
 </tr>
 
 <!--[nocache]-->
@@ -37,7 +36,7 @@
 <td><!--[$item.code|regex_replace:"/^(\d{4})(\d{4})(\d{4})/":"\${1}-\${2}-\${3}"]--></td>
 <td>
 <a href="<!--[pnmodurl modname="wiifriends" func="editwfc" id=$item.id ]-->"
-	title="Edit this game."><!--[$editIcon.imgtag]--></a>
+	title="<!--[gt text='Edit this game']-->."><!--[$editIcon.imgtag]--></a>
 </td>
 </tr>
 <!--[/foreach]-->

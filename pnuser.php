@@ -26,11 +26,6 @@ function wiifriends_user_main()
 {
 
     $uid = pnUserGetVar('uid');
-//    $pnRender->assign('uid', $uid);
-    if ($uid < 1) {
-        $url = pnModUrl('users', 'user', 'loginscreen');
-        return pnRedirect($url);
-    }
 
     if (!SecurityUtil::checkPermission('wiifriends::', '::', ACCESS_OVERVIEW)) {
         return pnVarPrepHTMLDisplay(_MODULENOAUTH);

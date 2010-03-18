@@ -11,7 +11,7 @@
 $modversion['name']         = pnVarPrepForDisplay(_WIIFRIENDS_NAME);
 $modversion['displayname']  = pnVarPrepForDisplay(_WIIFRIENDS_DISPLAYNAME);
 $modversion['description']  = pnVarPrepForDisplay(_WIIFRIENDS_DESCRIPTION);
-$modversion['version']      = '1.0';
+$modversion['version']      = '1.1';
 $modversion['credits']      = 'pndocs/credits.txt';
 $modversion['help']         = 'pndocs/install.txt';
 $modversion['changelog']    = 'pndocs/changelog.txt';

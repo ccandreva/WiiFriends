@@ -39,20 +39,25 @@ class wiifriends_user_addgameHandler extends pnFormHandler
         $formData['game'] = '';
         $render->pnFormSetValues( $formData);
 
+        
         // Send mail to admin to say a game has been submitted.
         $mail = "\nPlease approve as soon as you can.\n";
-        $toaddress = 'chris@westnet.com';
-        $toname = 'Chris Candreva';
-        pnModAPIFunc('Mailer', 'user', 'sendmessage',
+        $toaddress = pnModGetVar('WiiFriends', 'adminEmail');
+        if ($toaddress == '') {
+          $toaddress = pnConfigGetVar('adminmail');
+        }
+        if ($toaddress) {
+          // $toname = '';
+          pnModAPIFunc('Mailer', 'user', 'sendmessage',
                         array('toaddress'=> $toaddress,
-                                'toname' => $toname,
+                                'toname' => '',
                                 'subject' => 'A new game has been submitted',
                                 'fromname' => 'WiiFriends',
-                                'fromaddress' => 'webmaster@candreva.us',
+                                'fromaddress' => $toname,
                                 'body' => $mail,
                                 'html' => false )
-                );        
-
+                );
+        }
       } else {
         LogUtil::registerError("Error inserting game <b>$game</b>");
 
