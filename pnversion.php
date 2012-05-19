@@ -8,9 +8,12 @@
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  */
 
-$modversion['name']         = pnVarPrepForDisplay(_WIIFRIENDS_NAME);
-$modversion['displayname']  = pnVarPrepForDisplay(_WIIFRIENDS_DISPLAYNAME);
-$modversion['description']  = pnVarPrepForDisplay(_WIIFRIENDS_DESCRIPTION);
+$dom = ZLanguage::getModuleDomain('wiifriends');
+
+$modversion['name']         = __('wiifriends', $dom);
+$modversion['displayname']  = __('Wii Friends', $dom);
+$modversion['description']  = __('Manage your Wii friends and console codes.',$dom);
+$modversion['url']         = __('wiifriends', $dom);
 $modversion['version']      = '1.1';
 $modversion['credits']      = 'pndocs/credits.txt';
 $modversion['help']         = 'pndocs/install.txt';
