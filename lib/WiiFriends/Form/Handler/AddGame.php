@@ -1,6 +1,6 @@
 <?php
 
-class WiiFriends_Form_Handler_User_AddGame extends Zikula_Form_AbstractHandler
+class WiiFriends_Form_Handler_AddGame extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */

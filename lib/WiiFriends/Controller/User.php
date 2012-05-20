@@ -50,7 +50,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
         $view = FormUtil::newForm('WiiFriends', $this);
 
         $tmplfile = 'wiifriends_user_addgame.htm';
-        $formobj = new WiiFriends_Form_Handler_User_AddGame(array());
+        $formobj = new WiiFriends_Form_Handler_AddGame(array());
         $output = $view->execute($tmplfile, $formobj);
         return $output;
 
