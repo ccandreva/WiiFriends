@@ -47,17 +47,11 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $GLOBALS['info']['title'] = 'WiiFriends :: Add a game';
 
-        $render = FormUtil::newForm('WiiFriends', $this);
+        $view = FormUtil::newForm('WiiFriends', $this);
 
         $tmplfile = 'wiifriends_user_addgame.htm';
-        if ($render->template_exists($tmplfile))
-        {
-            $formobj = new wiifriends_user_addgameHandler();
-            $output = $render->fetch($tmplfile, $formobj);
-        } else {
-            $output =  "No template found: $tmplfile";
-        }
-
+        $formobj = new WiiFriends_Form_Handler_User_AddGame(array());
+        $output = $view->execute($tmplfile, $formobj);
         return $output;
 
     }

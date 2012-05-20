@@ -1,23 +1,27 @@
 <?php
 
-class wiifriends_user_addgameHandler extends pnFormHandler
+class WiiFriends_Form_Handler_User_AddGame extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
+    public function __construct($args)
+    {
+        $this->args = $args;
+    }
     
     /* Functions */
-    function initialize(&$render)
+    public function initialize(Zikula_Form_View $view)
     {
     
       return true;
     }
     
-    function handleCommand(&$render, &$args)
+    public function handleCommand(Zikula_Form_View $view, &$args)
     {
     
-      if (!$render->pnFormIsValid()) return false;
+      if (!$this->view->isValid()) return false;
 
-      $formData = $render->pnFormGetValues();
+      $formData = $this->view->getValues();
       
       // Check if this needs to be approved or not
       if (SecurityUtil::checkPermission( 'WiiFriends::', "::", ACCESS_ADMIN)) {
@@ -30,25 +34,23 @@ class wiifriends_user_addgameHandler extends pnFormHandler
         
       $formData['obj_status'] = $obj_status;
       
-      $game = pnVarPrepForDisplay($formData['game']) ;
+      $game = DataUtil::formatForDisplay($formData['game']) ;
       $formData['game'] = $game;
       if (DBUtil::insertObject($formData, 'wiifriends_games', true)) {
         LogUtil::registerStatus("Your game <b>$game</b> $okmess");
 
         // Blank game name field for next form view
         $formData['game'] = '';
-        $render->pnFormSetValues( $formData);
+        $this->view->setValues( $formData);
 
-        
         // Send mail to admin to say a game has been submitted.
-        $mail = "\nPlease approve as soon as you can.\n";
-        $toaddress = pnModGetVar('WiiFriends', 'adminEmail');
+      $mail = "\nPlease approve as soon as you can.\n";
+        $toaddress = ModUtil::getVar('WiiFriends', 'adminEmail');
         if ($toaddress == '') {
-          $toaddress = pnConfigGetVar('adminmail');
+          $toaddress = System::getVar('adminmail');
         }
         if ($toaddress) {
-          // $toname = '';
-          pnModAPIFunc('Mailer', 'user', 'sendmessage',
+          ModUtil::apiFunc('Mailer', 'user', 'sendmessage',
                         array('toaddress'=> $toaddress,
                                 'toname' => '',
                                 'subject' => 'A new game has been submitted',
@@ -58,14 +60,8 @@ class wiifriends_user_addgameHandler extends pnFormHandler
                                 'html' => false )
                 );
         }
-      } else {
+    } else {
         LogUtil::registerError("Error inserting game <b>$game</b>");
-
       }
-
     }
-
-
   }
-
-
