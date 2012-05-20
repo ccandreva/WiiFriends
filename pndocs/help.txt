@@ -1,9 +1,0 @@
-
-This is a basic module to allow a group to exchange Wii codes. 
-
-Permissions can then be set using just  wifriends::  ::
-
-ACCESS_OVERVIEW allows one to view lists
-ACCESS_READ allows one to view individual entries
-ACCESS_ADD allows one to add themselves to the database.
-
