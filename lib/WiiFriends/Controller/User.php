@@ -38,7 +38,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
 
 
-    public function addgame($args)
+    public function addgame()
     {
         // Security check
         if (!SecurityUtil::checkPermission( 'WiiFriends::', "::", ACCESS_ADD)) {
@@ -62,7 +62,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
     }
 
-    public function showgames($args)
+    public function showgames()
     {
 
         if (!SecurityUtil::checkPermission('wiifriends::', '::', ACCESS_OVERVIEW)) {
@@ -82,7 +82,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
         return $pnRender->fetch('wiifriends_user_showgames.htm');
     }
 
-    public function showcodes($args)
+    public function showcodes()
     {
 
         if (!SecurityUtil::checkPermission('wiifriends::', '::', ACCESS_READ)) {
@@ -113,7 +113,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
     }
 
 
-    public function editconsole($args)
+    public function editconsole()
     {
         // Security check
         if (!SecurityUtil::checkPermission( 'WiiFriends::', "::", ACCESS_ADD)) {
@@ -137,7 +137,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
     }
 
-    public function editwfc($args)
+    public function editwfc()
     {
         // Security check
         if (!SecurityUtil::checkPermission( 'WiiFriends::', "::", ACCESS_ADD)) {
@@ -168,7 +168,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
     }
 
-    public function addwfc($args)
+    public function addwfc()
     {
         // Security check
         if (!SecurityUtil::checkPermission( 'WiiFriends::', "::", ACCESS_ADD)) {
@@ -194,7 +194,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
     }
 
-    public function showconsole($args)
+    public function showconsole()
     {
 
         if (!SecurityUtil::checkPermission('wiifriends::', '::', ACCESS_READ)) {
