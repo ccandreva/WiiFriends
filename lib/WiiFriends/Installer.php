@@ -10,7 +10,7 @@
 
 class WiiFriends_Installer extends Zikula_AbstractInstaller
 {
-    public function wiifriends_init()
+    public function install()
     {
         ModUtil::setVar('wiifriends', 'modulestylesheet', 'wiifriends.css');
         ModUtil::setVar('wiifriends', 'adminEmail', '');
@@ -24,11 +24,14 @@ class WiiFriends_Installer extends Zikula_AbstractInstaller
         return true;
     }
 
-    public function wiifriends_upgrade($oldversion)
+    public function upgrade($oldversion)
     {
         switch($oldversion) {
             case "1.0" :
                 ModUtil::setVar('wiifriends', 'adminEmail', '');
+
+                case "1.1" :
+                case "1.1.1" :
 
             /* This break should be after the last upgrade */
                 break;
@@ -41,7 +44,7 @@ class WiiFriends_Installer extends Zikula_AbstractInstaller
         return true;
     }
 
-    public function wiifriends_delete()
+    public function uninstall()
     {
         ModUtil::delVar('wiifriends');
         if ( !DBUtil::dropTable('wiifriends_console') ) return false;
