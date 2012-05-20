@@ -175,8 +175,6 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
             return LogUtil::registerPermissionError();
         }
 
-        $id = FormUtil :: getPassedValue('id');
-
         $GLOBALS['info']['title'] = 'WiiFriends :: Add Friend Code';
 
         $render = FormUtil::newForm('WiiFriends');
