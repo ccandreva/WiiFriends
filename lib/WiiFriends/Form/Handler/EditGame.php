@@ -1,34 +1,37 @@
 <?php
 
-class wiifriends_admin_editgameHandler extends pnFormHandler
+class WiiFriends_Form_Handler_EditGame extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
     var $gameID;	// ID of the game we are editing.
     
     /* Functions */
-    function initialize(&$render)
+    public function __construct()
     {
+        //$this->args = $args;
+    }
     
+    public function initialize(Zikula_Form_View $view)
+    {
       $this->gameID = FormUtil :: getPassedValue('id');
       $gameObj = DBUtil::SelectObjectById('wiifriends_games', $this->gameID);
       $gameObj['obj_statusItems'] = array (
         array('text' => 'A', value => 'A'),
         array('text' => 'P', value => 'P'),
       );
-      $render->assign($gameObj);
+      $this->view->assign($gameObj);
       
       return true;
     }
     
-    function handleCommand(&$render, &$args)
-    {
-    
-      if (!$render->pnFormIsValid()) return false;
+    public function handleCommand(Zikula_Form_View $view, &$args)
+    {    
+      if (!$this->view->isValid()) return false;
 
-      $formData = $render->pnFormGetValues();
+      $formData = $this->view->getValues();
       
-      $game = pnVarPrepForDisplay($formData['game']) ;
+      $game = DataUtil::formatForDisplay($formData['game']) ;
       $formData['game'] = $game;
       $formData['id']=$this->gameID;
       
@@ -44,8 +47,8 @@ class wiifriends_admin_editgameHandler extends pnFormHandler
 
       }
 
-      $url = pnModUrl('wiifriends', 'admin', 'showgames');
-      return $render->pnFormRedirect($url);
+      $url = ModUtil::url('wiifriends', 'admin', 'showgames');
+      return $this->view->redirect($url);
 
     }
 

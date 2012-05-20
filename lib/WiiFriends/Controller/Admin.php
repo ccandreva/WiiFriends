@@ -67,13 +67,13 @@ class WiiFriends_Controller_Admin extends Zikula_AbstractController
         }
 
         $GLOBALS['info']['title'] = 'WiiFriends :: Edit a game';
-        $render = FormUtil::newpnForm('WiiFriends');
+        $view = FormUtil::newForm('WiiFriends', $this);
         $tmplfile = 'wiifriends_admin_editgame.htm';
 
-        if ($render->template_exists($tmplfile))
+        if ($view->template_exists($tmplfile))
         {
-            $formobj = new wiifriends_admin_editgameHandler();
-            $output = $render->pnFormExecute($tmplfile, $formobj);
+            $formobj = new WiiFriends_Form_Handler_EditGame();
+            $output = $view->execute($tmplfile, $formobj);
         } else {
             $output =  "No template found: $tmplfile";
         }
