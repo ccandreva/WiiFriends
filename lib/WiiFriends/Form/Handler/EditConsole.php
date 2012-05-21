@@ -1,31 +1,35 @@
 <?php
 
-class wiifriends_user_editconsoleHandler extends pnFormHandler
+class WiiFriends_Form_Handler_EditConsole extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
     
     /* Functions */
-    function initialize(&$render)
+    public function __construct()
+    {
+        //$this->args = $args;
+    }
+    
+    public function initialize(Zikula_Form_View $view)
     {
       $uid = pnUserGetVar('uid');
       $code = wiifriendsGetConsoleCode($uid);
-      $render->assign('code', $code);      
-
+      $this->view->assign('code', $code);
       return true;
     }
     
-    function handleCommand(&$render, &$args)
+    public function handleCommand(Zikula_Form_View $view, &$args)
     {
     
-      $ok = $render->pnFormIsValid();
-      $formData = $render->pnFormGetValues();
-      
-      $codePlugin = & $render->pnFormGetPluginById('code');
+      $ok = $this->view->isValid();
+      $formData = $this->view->getValues();
+    
+      $codePlugin = $this->view->getPluginById('code');
       $code = $formData['code'];
       $matches = array();
       if (preg_match('/^(\d{4})[ .-]?(\d{4})[ .-]?(\d{4})[ .-]?(\d{4})$/', $code, $matches ) ) {
-        $codePlugin->clearValidation($render);
+        $codePlugin->clearValidation($this->view);
         $code = $matches[1].$matches[2].$matches[3].$matches[4];
         $formData['code'] = $code;
       } else {
@@ -35,10 +39,9 @@ class wiifriends_user_editconsoleHandler extends pnFormHandler
       if (!$ok) return false;
       
       // Get Userid
-      $uid = pnUserGetVar('uid');
+      $uid = UserUtil::getVar('uid');
 
       $formData['id'] = $uid;
-      
       
       if ( DBUtil::selectObjectByID('wiifriends_console', $uid) ) {
         DBUtil::updateObject($formData, 'wiifriends_console');
@@ -48,8 +51,8 @@ class wiifriends_user_editconsoleHandler extends pnFormHandler
         LogUtil::registerStatus("Your code has been added.");
       }      
       
-      $url = pnModUrl('wiifriends', 'user');
-      return $render->pnFormRedirect($url);
+      $url = ModUtil::url('wiifriends', 'user');
+      return $this->view->redirect($url);
 
     }
 

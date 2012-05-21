@@ -116,16 +116,11 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $GLOBALS['info']['title'] = 'WiiFriends :: Edit Console Code';
 
-        $render = FormUtil::newForm('WiiFriends');
+        $view = FormUtil::newForm('WiiFriends', $this);
 
         $tmplfile = 'wiifriends_user_editconsole.htm';
-        if ($render->template_exists($tmplfile))
-        {
-            $formobj = new wiifriends_user_editconsoleHandler();
-            $output = $render->fetch($tmplfile, $formobj);
-        } else {
-            $output =  "No template found: $tmplfile";
-        }
+        $formobj = new WiiFriends_Form_Handler_EditConsole();
+        $output = $view->execute($tmplfile, $formobj);
 
         return $output;
 
