@@ -154,25 +154,16 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
         $id = FormUtil :: getPassedValue('id');
         if ( ($id == '') || preg_match('/\D/',$id) ) {
             LogUtil::registerError("Invalid Code");
-            $url = pnModUrl('wiifriends', 'user' );
+            $url = ModUtil::url('wiifriends', 'user' );
             return System::redirect($url);
         }
 
         $GLOBALS['info']['title'] = 'WiiFriends :: Edit Friend Code';
 
-        $render = FormUtil::newForm('WiiFriends');
-
+        $view = FormUtil::newForm('WiiFriends', $this);
         $tmplfile = 'wiifriends_user_editwfc.htm';
-        if ($render->template_exists($tmplfile))
-        {
-            $formobj = new wiifriends_user_editwfcHandler();
-            $output = $render->fetch($tmplfile, $formobj);
-        } else {
-            $output =  "No template found: $tmplfile";
-        }
-
-        return $output;
-
+        $formobj = new WiiFriends_Form_Handler_EditWfc($this, $id);
+        return $view->execute($tmplfile, $formobj);
     }
 
     public function showconsole()

@@ -1,23 +1,26 @@
 <?php
 
-class wiifriends_user_editwfcHandler extends pnFormHandler
+class WiiFriends_Form_Handler_EditWfc extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
+    var $controller;    
     var $wfcID;		// ID of the friend code we are editing.
-        
+
     /* Functions */
-    function initialize(&$render)
+    public function __construct($controller, $wfcID)
     {
-
-      $this->wfcID = FormUtil :: getPassedValue('id');
-
-      $joinInfo[] = wiifriendsGamesJoin();
-                                                            
+        $this->controller = $controller;
+        $this->wfcID = $wfcID;
+    }
+    
+    public function initialize(Zikula_Form_View $view)
+     {
       // Get current user
       $uid = pnUserGetVar('uid');
 
-      $wfcObj = DBUtil::selectExpandedObjectById('wiifriends_wfc', $joinInfo, $this->wfcID);
+      $wfcObj = DBUtil::selectExpandedObjectById('wiifriends_wfc', 
+              array($this->controller->joinInfo), $this->wfcID);
 
       // Make sure the requested object is owned by the user
       if ( $wfcObj['cr_uid'] != $uid) {
@@ -25,17 +28,17 @@ class wiifriends_user_editwfcHandler extends pnFormHandler
       }
 
       $wfcObj['code'] = preg_replace("/^(\d{4})(\d{4})(\d{4})/", "\${1}-\${2}-\${3}", $wfcObj['code']);
-      $render->assign($wfcObj);
+      $this->view->assign($wfcObj);
       
       return true;
     }
     
-    function handleCommand(&$render, &$args)
+        public function handleCommand(Zikula_Form_View $view, &$args)
     {
     
 
-      $ok = $render->pnFormIsValid();
-      $formData = $render->pnFormGetValues();
+      $ok = $this->view->isValid();
+      $formData = $this->view->getValues();
       $formData['id'] = $this->wfcID;
 
       if ($formData['delete']) {
@@ -44,11 +47,11 @@ class wiifriends_user_editwfcHandler extends pnFormHandler
 
       } else {
 
-        $codePlugin = &$render->pnFormGetPluginById('code');
+        $codePlugin = &$this->view->getPluginById('code');
         $code = $formData['code'];
         $matches = array();
         if (preg_match('/^(\d{4})[ .-]?(\d{4})[ .-]?(\d{4})$/', $code, $matches ) ) {
-          $codePlugin->clearValidation($render);
+          $codePlugin->clearValidation($this->view);
           $code = $matches[1].$matches[2].$matches[3];
           $formData['code'] = $code;
         } else {
@@ -58,14 +61,14 @@ class wiifriends_user_editwfcHandler extends pnFormHandler
         if (!$ok) return false;
       
         // Get Userid
-        $uid = pnUserGetVar('uid');
+        $uid = UserUtil::getVar('uid');
       
         DBUtil::updateObject($formData, 'wiifriends_wfc');
         LogUtil::registerStatus("Your code has been updated.");
       }
       
-      $url = pnModUrl('wiifriends', 'user');
-      return $render->pnFormRedirect($url);
+      $url = ModUtil::url('wiifriends', 'user');
+      return $this->view->redirect($url);
 
     }
 
