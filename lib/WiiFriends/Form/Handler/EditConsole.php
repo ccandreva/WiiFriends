@@ -4,17 +4,20 @@ class WiiFriends_Form_Handler_EditConsole extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
+    var $controller;
     
     /* Functions */
-    public function __construct()
+    public function __construct($controller)
     {
-        //$this->args = $args;
+        $this->controller = $controller;
     }
     
     public function initialize(Zikula_Form_View $view)
     {
       $uid = pnUserGetVar('uid');
-      $code = wiifriendsGetConsoleCode($uid);
+      // $code = wiifriendsGetConsoleCode($uid);
+      $ctrl = $this->controller;
+      $code = $ctrl->GetConsoleCode($uid);
       $this->view->assign('code', $code);
       return true;
     }
