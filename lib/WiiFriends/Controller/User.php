@@ -10,13 +10,6 @@
 
 class WiiFriends_Controller_User extends Zikula_AbstractController
 {
-    var $joinInfo = array ( 'join_table' => 'wiifriends_games',
-            'join_field' => 'game',
-            'object_field_name' => 'gameName',
-            'compare_field_table' => 'game',
-            'compare_field_join' => 'id'
-        );
-
 
     public function main()
     {
@@ -27,14 +20,14 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
             return LogUtil::registerPermissionError();
         }
 
-        $code = $this->GetConsoleCode($uid); 
+        $code = WiiFriends_Util::GetConsoleCode($uid); 
         $this->view->assign('console', $code);
 
         $where = "WHERE wiifriends_wfc_cr_uid=$uid";
         $orderby = 'gameName';
 
         $codesObj = DBUtil::selectExpandedObjectArray('wiifriends_wfc',
-                array($this->joinInfo), $where, $orderby );
+                array(WiiFriends_Util::joinInfo()), $where, $orderby );
         $this->view->assign('codes', $codesObj);
 
         return $this->view->fetch('wiifriends_user_main.htm');
@@ -162,7 +155,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $view = FormUtil::newForm('WiiFriends', $this);
         $tmplfile = 'wiifriends_user_editwfc.htm';
-        $formobj = new WiiFriends_Form_Handler_EditWfc($this, $id);
+        $formobj = new WiiFriends_Form_Handler_EditWfc($id);
         return $view->execute($tmplfile, $formobj);
     }
 
@@ -180,17 +173,4 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         return $this->view->fetch('wiifriends_user_showconsole.htm');
     }
-    
-    public function GetConsoleCode($uid)
-    {
-        $consoleObj = DBUtil::selectObjectByID('wiifriends_console', $uid);
-        if ($consoleObj) {
-            $code = preg_replace('/^(\d{4})(\d{4})(\d{4})(\d{4})$/', '$1-$2-$3-$4', $consoleObj['code']);
-            return $code;
-        }
-
-        return false;
-    }
-
-
 }

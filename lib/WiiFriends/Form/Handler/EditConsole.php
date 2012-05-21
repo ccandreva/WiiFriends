@@ -7,9 +7,8 @@ class WiiFriends_Form_Handler_EditConsole extends Zikula_Form_AbstractHandler
     var $controller;
     
     /* Functions */
-    public function __construct($controller)
+    public function __construct()
     {
-        $this->controller = $controller;
     }
     
     public function initialize(Zikula_Form_View $view)
@@ -17,7 +16,7 @@ class WiiFriends_Form_Handler_EditConsole extends Zikula_Form_AbstractHandler
       $uid = pnUserGetVar('uid');
       // $code = wiifriendsGetConsoleCode($uid);
       $ctrl = $this->controller;
-      $code = $ctrl->GetConsoleCode($uid);
+      $code = WiiFriends_Util::GetConsoleCode($uid);
       $this->view->assign('code', $code);
       return true;
     }

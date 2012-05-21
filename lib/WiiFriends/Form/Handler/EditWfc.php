@@ -4,13 +4,11 @@ class WiiFriends_Form_Handler_EditWfc extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
-    var $controller;    
     var $wfcID;		// ID of the friend code we are editing.
 
     /* Functions */
-    public function __construct($controller, $wfcID)
+    public function __construct($wfcID)
     {
-        $this->controller = $controller;
         $this->wfcID = $wfcID;
     }
     
@@ -20,7 +18,7 @@ class WiiFriends_Form_Handler_EditWfc extends Zikula_Form_AbstractHandler
       $uid = pnUserGetVar('uid');
 
       $wfcObj = DBUtil::selectExpandedObjectById('wiifriends_wfc', 
-              array($this->controller->joinInfo), $this->wfcID);
+              array(WiiFriends_Util::joinInfo()), $this->wfcID);
 
       // Make sure the requested object is owned by the user
       if ( $wfcObj['cr_uid'] != $uid) {
