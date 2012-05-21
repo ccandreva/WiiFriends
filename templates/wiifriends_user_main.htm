@@ -6,6 +6,9 @@
 
 {insert name='getstatusmsg' module='WiiFriends'}
 
+{nocache}
+{img modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon}
+{/nocache}
 
 <h2>{gt text="Your Information"}</h2>
 {modurl modname="wiifriends" func="editconsole" assign="consoleurl"}
@@ -29,7 +32,6 @@
     </tr>
 
     {nocache}
-{img modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon}
         {foreach item=item from=$codes}
             <tr>
             <td>{$item.gameName}</td>
