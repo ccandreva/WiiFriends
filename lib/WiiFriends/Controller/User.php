@@ -137,19 +137,11 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $GLOBALS['info']['title'] = 'WiiFriends :: Add Friend Code';
 
-        $render = FormUtil::newForm('WiiFriends');
+        $view = FormUtil::newForm('WiiFriends', $this);
 
         $tmplfile = 'wiifriends_user_addwfc.htm';
-        if ($render->template_exists($tmplfile))
-        {
-            $formobj = new wiifriends_user_addwfcHandler();
-            $output = $render->fetch($tmplfile, $formobj);
-        } else {
-            $output =  "No template found: $tmplfile";
-        }
-
-        return $output;
-
+        $formobj = new WiiFriends_Form_Handler_AddWfc();
+        return $view->execute($tmplfile, $formobj);
     }
 
     public function editwfc()

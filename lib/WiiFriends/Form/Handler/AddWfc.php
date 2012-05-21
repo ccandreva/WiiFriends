@@ -1,39 +1,38 @@
 <?php
 
-class wiifriends_user_addwfcHandler extends pnFormHandler
+class WiiFriends_Form_Handler_AddWfc extends Zikula_Form_AbstractHandler
   {
     
     /* Global variables here */
     
     /* Functions */
-    function initialize(&$render)
+    public function __construct()
+    {
+    }
+    
+    public function initialize(Zikula_Form_View $view)
     {
 
       $gamesObj = DBUtil::selectObjectArray('wiifriends_games');
-
       $gameList = array();
-
       foreach ($gamesObj as $game ) {
               $gameList[] = array('text' => $game['game'], value => $game['id']);
       }
       
-      $render->assign('gameItems', $gameList);
-      
-      
+      $this->view->assign('gameItems', $gameList);
       return true;
     }
     
-    function handleCommand(&$render, &$args)
+    public function handleCommand(Zikula_Form_View $view, &$args)
     {
-    
-      $ok = $render->pnFormIsValid();
-      $formData = $render->pnFormGetValues();
+      $ok = $this->view->isValid();
+      $formData = $this->view->getValues();
       
-      $codePlugin = & $render->pnFormGetPluginById('code');
+      $codePlugin = & $this->view->getPluginById('code');
       $code = $formData['code'];
       $matches = array();
       if (preg_match('/^(\d{4})[ .-]?(\d{4})[ .-]?(\d{4})$/', $code, $matches ) ) {
-        $codePlugin->clearValidation($render);
+        $codePlugin->clearValidation($this->view);
         $code = $matches[1].$matches[2].$matches[3];
         $formData['code'] = $code;
       } else {
@@ -45,8 +44,8 @@ class wiifriends_user_addwfcHandler extends pnFormHandler
       DBUtil::insertObject($formData, 'wiifriends_wfc') ;
       LogUtil::registerStatus("Your code has been added.");
       
-      $url = pnModUrl('wiifriends', 'user');
-      return $render->pnFormRedirect($url);
+      $url = ModUtil::url('wiifriends', 'user');
+      return $this->view->redirect($url);
 
     }
 
