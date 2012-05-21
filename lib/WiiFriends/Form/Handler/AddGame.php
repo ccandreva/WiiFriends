@@ -43,22 +43,24 @@ class WiiFriends_Form_Handler_AddGame extends Zikula_Form_AbstractHandler
         $formData['game'] = '';
         $this->view->setValues( $formData);
 
-        // Send mail to admin to say a game has been submitted.
-      $mail = "\nPlease approve as soon as you can.\n";
-        $toaddress = ModUtil::getVar('WiiFriends', 'adminEmail');
-        if ($toaddress == '') {
-          $toaddress = System::getVar('adminmail');
-        }
-        if ($toaddress) {
-          ModUtil::apiFunc('Mailer', 'user', 'sendmessage',
-                        array('toaddress'=> $toaddress,
-                                'toname' => '',
-                                'subject' => 'A new game has been submitted',
-                                'fromname' => 'WiiFriends',
-                                'fromaddress' => $toname,
-                                'body' => $mail,
-                                'html' => false )
-                );
+        if ($obj_status == 'P') {
+            // Send mail to admin to say a game has been submitted.
+            $mail = "\nPlease approve as soon as you can.\n";
+            $toaddress = ModUtil::getVar('WiiFriends', 'adminEmail');
+            if ($toaddress == '') {
+            $toaddress = System::getVar('adminmail');
+            }
+            if ($toaddress) {
+            ModUtil::apiFunc('Mailer', 'user', 'sendmessage',
+                            array('toaddress'=> $toaddress,
+                                    'toname' => '',
+                                    'subject' => 'A new game has been submitted',
+                                    'fromname' => 'WiiFriends',
+                                    'fromaddress' => $toname,
+                                    'body' => $mail,
+                                    'html' => false )
+                    );
+            }
         }
     } else {
         LogUtil::registerError("Error inserting game <b>$game</b>");
