@@ -8,10 +8,6 @@
 * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
 */
 
-//Loader::requireOnce('includes/pnForm.php');
-//require_once('pnclass/editgamehandler.php');
-//require_once('pnclass/editadminhandler.php');
-
 class WiiFriends_Controller_Admin extends Zikula_AbstractController
 {
 
@@ -23,13 +19,8 @@ class WiiFriends_Controller_Admin extends Zikula_AbstractController
 
         $render = FormUtil::newForm('WiiFriends', $this);
         $tmplfile='wiifriends_admin_main.htm';
-        if ($render->template_exists($tmplfile))
-        {
-            $formobj = new WiiFriends_Form_Handler_Config();
-            $output = $render->execute($tmplfile, $formobj);
-        } else {
-            $output =  "No template found: $tmplfile";
-        }
+        $formobj = new WiiFriends_Form_Handler_Config();
+        $output = $render->execute($tmplfile, $formobj);
         return $output;
 
 
