@@ -74,10 +74,9 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
         $orderby='game';
         $games = DBUtil::selectObjectArray('wiifriends_games', $where, $orderby);
 
-        $pnRender = pnRender :: getInstance('WiiFriends');
-        $pnRender->assign('games', $games);
+        $this->view->assign('games', $games);
 
-        return $pnRender->fetch('wiifriends_user_showgames.htm');
+        return $this->view->fetch('wiifriends_user_showgames.htm');
     }
 
     public function showcodes()
@@ -93,7 +92,6 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
             $url = ModUtil::url('wiifriends', 'user', 'showgames');
             return System::redirect($url);
         }
-
 
         // User function should only show approved games
         $where = "WHERE wiifriends_wfc_game=$id";
@@ -130,6 +128,30 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
     }
 
+    public function addwfc()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission( 'WiiFriends::', "::", ACCESS_ADD)) {
+            return LogUtil::registerPermissionError();
+        }
+
+        $GLOBALS['info']['title'] = 'WiiFriends :: Add Friend Code';
+
+        $render = FormUtil::newForm('WiiFriends');
+
+        $tmplfile = 'wiifriends_user_addwfc.htm';
+        if ($render->template_exists($tmplfile))
+        {
+            $formobj = new wiifriends_user_addwfcHandler();
+            $output = $render->fetch($tmplfile, $formobj);
+        } else {
+            $output =  "No template found: $tmplfile";
+        }
+
+        return $output;
+
+    }
+
     public function editwfc()
     {
         // Security check
@@ -152,30 +174,6 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
         if ($render->template_exists($tmplfile))
         {
             $formobj = new wiifriends_user_editwfcHandler();
-            $output = $render->fetch($tmplfile, $formobj);
-        } else {
-            $output =  "No template found: $tmplfile";
-        }
-
-        return $output;
-
-    }
-
-    public function addwfc()
-    {
-        // Security check
-        if (!SecurityUtil::checkPermission( 'WiiFriends::', "::", ACCESS_ADD)) {
-            return LogUtil::registerPermissionError();
-        }
-
-        $GLOBALS['info']['title'] = 'WiiFriends :: Add Friend Code';
-
-        $render = FormUtil::newForm('WiiFriends');
-
-        $tmplfile = 'wiifriends_user_addwfc.htm';
-        if ($render->template_exists($tmplfile))
-        {
-            $formobj = new wiifriends_user_addwfcHandler();
             $output = $render->fetch($tmplfile, $formobj);
         } else {
             $output =  "No template found: $tmplfile";
