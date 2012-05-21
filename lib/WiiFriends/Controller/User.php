@@ -30,7 +30,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
                 array(WiiFriends_Util::joinInfo()), $where, $orderby );
         $this->view->assign('codes', $codesObj);
 
-        return $this->view->fetch('wiifriends_user_main.htm');
+        return $this->view->fetch('wiifriends_user_main.tpl');
     }
 
 
@@ -46,7 +46,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $view = FormUtil::newForm('WiiFriends', $this);
 
-        $tmplfile = 'wiifriends_user_addgame.htm';
+        $tmplfile = 'wiifriends_user_addgame.tpl';
         $formobj = new WiiFriends_Form_Handler_AddGame(array());
         $output = $view->execute($tmplfile, $formobj);
         return $output;
@@ -69,7 +69,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $this->view->assign('games', $games);
 
-        return $this->view->fetch('wiifriends_user_showgames.htm');
+        return $this->view->fetch('wiifriends_user_showgames.tpl');
     }
 
     public function showcodes()
@@ -98,7 +98,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
         $this->view->assign('game', $gameObj['game']);
 
 
-        return $this->view->fetch('wiifriends_user_showcodes.htm');
+        return $this->view->fetch('wiifriends_user_showcodes.tpl');
     }
 
 
@@ -113,7 +113,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $view = FormUtil::newForm('WiiFriends', $this);
 
-        $tmplfile = 'wiifriends_user_editconsole.htm';
+        $tmplfile = 'wiifriends_user_editconsole.tpl';
         $formobj = new WiiFriends_Form_Handler_EditConsole($this);
         $output = $view->execute($tmplfile, $formobj);
 
@@ -132,7 +132,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $view = FormUtil::newForm('WiiFriends', $this);
 
-        $tmplfile = 'wiifriends_user_addwfc.htm';
+        $tmplfile = 'wiifriends_user_addwfc.tpl';
         $formobj = new WiiFriends_Form_Handler_AddWfc();
         return $view->execute($tmplfile, $formobj);
     }
@@ -154,7 +154,7 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
         $GLOBALS['info']['title'] = 'WiiFriends :: Edit Friend Code';
 
         $view = FormUtil::newForm('WiiFriends', $this);
-        $tmplfile = 'wiifriends_user_editwfc.htm';
+        $tmplfile = 'wiifriends_user_editwfc.tpl';
         $formobj = new WiiFriends_Form_Handler_EditWfc($id);
         return $view->execute($tmplfile, $formobj);
     }
@@ -171,6 +171,6 @@ class WiiFriends_Controller_User extends Zikula_AbstractController
 
         $this->view->assign('codes', $codes);
 
-        return $this->view->fetch('wiifriends_user_showconsole.htm');
+        return $this->view->fetch('wiifriends_user_showconsole.tpl');
     }
 }

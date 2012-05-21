@@ -5,7 +5,7 @@
 * @copyright (C) 2010-2012, Chris Candreva
 * @link http://github.com/ccandreva/WiiFriends
 * @license See license.txt
-* @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+* @license GNU/GPL - http://www.gnu.org/copyleft/gpl.tpll
 */
 
 class WiiFriends_Controller_Admin extends Zikula_AbstractController
@@ -18,7 +18,7 @@ class WiiFriends_Controller_Admin extends Zikula_AbstractController
         }
 
         $render = FormUtil::newForm('WiiFriends', $this);
-        $tmplfile='wiifriends_admin_main.htm';
+        $tmplfile='wiifriends_admin_main.tpl';
         $formobj = new WiiFriends_Form_Handler_Config();
         $output = $render->execute($tmplfile, $formobj);
         return $output;
@@ -47,7 +47,7 @@ class WiiFriends_Controller_Admin extends Zikula_AbstractController
         $pnRender->caching = 0;
         $pnRender->assign('games', $games);
     //    $pnRender->assign('where', $where);
-        return $pnRender->fetch('wiifriends_admin_showgames.htm');
+        return $pnRender->fetch('wiifriends_admin_showgames.tpl');
     }
 
 
@@ -59,7 +59,7 @@ class WiiFriends_Controller_Admin extends Zikula_AbstractController
 
         $GLOBALS['info']['title'] = 'WiiFriends :: Edit a game';
         $view = FormUtil::newForm('WiiFriends', $this);
-        $tmplfile = 'wiifriends_admin_editgame.htm';
+        $tmplfile = 'wiifriends_admin_editgame.tpl';
 
         if ($view->template_exists($tmplfile))
         {

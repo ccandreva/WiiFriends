@@ -1,5 +1,5 @@
 {* $Id$ *}
-{include file="wiifriends_admin_menu.htm"}
+{include file="wiifriends_admin_menu.tpl"}
 <div class="z-admincontainer">
   <div class="z-adminpageicon">{pnimg modname=core src=filenew.gif set=icons/large  __alt='Wii Friends Module Admin' altml=true}</div>
   <h2>Options</h2>

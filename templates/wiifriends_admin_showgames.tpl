@@ -1,5 +1,5 @@
 
-{include file="wiifriends_admin_menu.htm"}
+{include file="wiifriends_admin_menu.tpl"}
 <div class="z-admincontainer">
 <div class="z-adminpageicon">{pnimg modname=core src=filenew.gif set=icons/large alt='' }</div>
 <h2>{gt text='All Games'}</h2>

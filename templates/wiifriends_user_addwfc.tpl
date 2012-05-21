@@ -1,7 +1,7 @@
 
 <h1>{gt text='Add Friend Code'}</h1>
 
-{include file="wiifriends_user_menu.htm"}
+{include file="wiifriends_user_menu.tpl"}
 {* <p>ID: {$id}</p> *}
 
 {insert name='getstatusmsg' module='WiiFriends'}

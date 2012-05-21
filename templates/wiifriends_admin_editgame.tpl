@@ -1,7 +1,7 @@
 
 <h1>{gt text="Game Administration"}</h1>
 
-{include file="wiifriends_user_menu.htm"}
+{include file="wiifriends_user_menu.tpl"}
 
 
 {insert name='getstatusmsg' module='WiiFriends'}

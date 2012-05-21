@@ -1,7 +1,7 @@
 
 <h1>{gt text='Suggest a Game'}</h1>
 
-{include file="wiifriends_user_menu.htm"}
+{include file="wiifriends_user_menu.tpl"}
 
 
 {insert name='getstatusmsg' module='WiiFriends'}
