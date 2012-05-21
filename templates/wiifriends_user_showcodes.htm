@@ -1,30 +1,30 @@
-<!--[* $Id$ *]-->
+{* $Id$ *}
 
-<h1><!--[gt text='Show Codes']--></h1>
+<h1>{gt text='Show Codes'}</h1>
 
-<!--[include file="wiifriends_user_menu.htm"]-->
+{include file="wiifriends_user_menu.htm"}
 
-<!--[insert name='getstatusmsg' module='WiiFriends']-->
+{insert name='getstatusmsg' module='WiiFriends'}
 
-<h2><!--[nocache]--><!--[$game]--><!--[/nocache]--></h2>
+<h2>{nocache}{$game}{/nocache}</h2>
 
 <table>
 <tr>
-<th><!--[gt text='User']--></th>
-<th><!--[gt text='Friend Code']--></th>
+<th>{gt text='User'}</th>
+<th>{gt text='Friend Code'}</th>
 </tr>
 
-<!--[nocache]-->
-<!--[foreach item=item from=$codes]-->
-<!--[pnusergetvar uid=$item.cr_uid name='_UREALNAME' assign=username]-->
-<!--[if $username =='' ]-->
-<!--[pnusergetvar uid=$item.cr_uid name='uname' assign=username]-->
-<!--[/if]-->
+{nocache}
+{foreach item=item from=$codes}
+{pnusergetvar uid=$item.cr_uid name='_UREALNAME' assign=username}
+{if $username =='' }
+{pnusergetvar uid=$item.cr_uid name='uname' assign=username}
+{/if}
 <tr>
-<td><!--[$username|pnvarprepfordisplay]--></td>
-<td><!--[$item.code|regex_replace:"/^(\d{4})(\d{4})(\d{4})/":"\${1}-\${2}-\${3}"]--></td>
+<td>{$username|pnvarprepfordisplay}</td>
+<td>{$item.code|regex_replace:"/^(\d{4})(\d{4})(\d{4})/":"\${1}-\${2}-\${3}"}</td>
 </tr>
-<!--[/foreach]-->
-<!--[/nocache]-->
+{/foreach}
+{/nocache}
 
 </table>
