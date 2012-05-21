@@ -9,7 +9,6 @@
 
 <h2>{gt text="Your Information"}</h2>
 {modurl modname="wiifriends" func="editconsole" assign="consoleurl"}
-{img modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon}
 
 {nocache}
 {if $console == '' }
@@ -30,10 +29,11 @@
     </tr>
 
     {nocache}
+{img modname=core src=xedit.gif set=icons/extrasmall alt='Edit' assign=editIcon}
         {foreach item=item from=$codes}
             <tr>
             <td>{$item.gameName}</td>
-            <td>{$item.code|regex_replace:"/^(\d{4})(\d{4})(\d{4})/":"\${1}-\${2}-\${3}"}</td>
+            <td>{$item.code}{*|regex_replace:"/^(\d{4})(\d{4})(\d{4})/":"\${1}-\${2}-\${3}"*}</td>
             <td>
             <a href="{modurl modname="wiifriends" func="editwfc" id=$item.id }"
                     title="{gt text='Edit this game'}.">{$editIcon.imgtag}</a>
